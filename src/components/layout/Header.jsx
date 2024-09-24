@@ -11,6 +11,7 @@ const HeaderDiv = styled.header`
     & > i {
         font-size: 30px;
         color: #595959;
+        cursor: pointer;
     }
 `;
 
@@ -37,16 +38,16 @@ export default function Header({ linkTo }) {
         linkTo === "back"
             ? "fa-regular fa-map"
             : linkTo === "favorites"
-            ? "fa-solid fa-thumbtack"
-            : "fa-solid fa-bars";
+            ? "fa-solid fa-bars"
+            : "fa-solid fa-thumbtack";
 
     const routingTo = () => {
         if (linkTo === "back") {
             navigate(-1);
         } else if (linkTo === "favorites") {
-            navigate("/favorites");
-        } else {
             navigate("/");
+        } else {
+            navigate("/favorites");
         }
     };
 
