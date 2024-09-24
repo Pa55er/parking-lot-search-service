@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Details from "./pages/Details";
+import DetailsPage from "./pages/DetailsPage";
 
 const router = createBrowserRouter([
     // {
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     // },
     {
         path: "/list/:PKLT_CD",
-        element: <Details />,
+        element: <DetailsPage />,
     },
     {
         path: "*",
