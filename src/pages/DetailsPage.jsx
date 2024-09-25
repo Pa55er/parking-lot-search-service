@@ -82,7 +82,6 @@ const Table = styled.table`
 
 export default function DetailsPage() {
     const target = useZustandStore((state) => state.detailTarget);
-    console.log(target);
 
     const formatTime = (time) => {
         const hours = time.slice(0, 2);
