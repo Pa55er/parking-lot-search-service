@@ -17,6 +17,7 @@ const List = styled.article`
     h2 {
         color: #4395f6;
         font-size: 20px;
+        cursor: pointer;
     }
     p {
         opacity: 0.54;

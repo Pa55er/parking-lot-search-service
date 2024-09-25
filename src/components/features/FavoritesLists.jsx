@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 import Header from "../layout/Header";
+import { useEffect } from "react";
+import FavoritesList from "../common/FavoritesList";
+import NoList from "../common/NoList";
 
 const FavoritesDiv = styled.div`
     width: 460px;
@@ -18,6 +21,17 @@ const TitleDiv = styled.div`
     color: #666666;
     font-size: 20px;
     font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+
+    span {
+        font-size: 15px;
+        opacity: 0.54;
+        cursor: pointer;
+    }
+    span:hover {
+        opacity: 1;
+    }
 `;
 
 export default function FavoritesLists() {
@@ -484,13 +498,21 @@ export default function FavoritesLists() {
         },
     ];
 
+    const handleClearFav = () => {};
+
+    useEffect(() => {}, []);
+
     return (
         <FavoritesDiv>
             <Header linkTo="favorites" />
             <TitleDiv>
                 <h2>즐겨찾기</h2>
-                <span>비우기</span>
+                <span onClick={handleClearFav}>비우기</span>
             </TitleDiv>
+            {lists.length === 0 && <NoList />}
+            {lists.map((list) => (
+                <FavoritesList key={list.PKLT_CD} info={list} />
+            ))}
         </FavoritesDiv>
     );
 }
