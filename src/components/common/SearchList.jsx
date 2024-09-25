@@ -22,6 +22,10 @@ const List = styled.article`
         opacity: 0.54;
         font-size: 15px;
     }
+    div {
+        display: flex;
+        justify-content: space-between;
+    }
 `;
 
 const LinkButton = styled(Link)`
@@ -29,11 +33,35 @@ const LinkButton = styled(Link)`
     font-size: 13px;
 `;
 
+const AddFavButton = styled.button`
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 13px;
+
+    &:hover {
+        color: purple;
+    }
+`;
+
 export default function SearchList({ info }) {
     const setDetailTarget = useZustandStore((state) => state.setDetailTarget);
-
     const handleDetailTarget = () => {
         setDetailTarget(info);
+    };
+
+    const handleAddFav = () => {
+        const favLists = JSON.parse(localStorage.getItem("favLists") || "[]");
+        const check = favLists.some((list) => list.PKLT_CD === info.PKLT_CD);
+
+        if (check) {
+            alert("이미 즐겨찾기된 주차장입니다.");
+        } else {
+            favLists.unshift({ ADDR: info.ADDR, PKLT_CD: info.PKLT_CD });
+            localStorage.setItem("favLists", JSON.stringify(favLists));
+            alert("즐겨찾기가 완료되었습니다.");
+        }
     };
 
     return (
@@ -44,9 +72,14 @@ export default function SearchList({ info }) {
                 <p>{`${info.ADDR} / ${info.PRK_TYPE_NM.split(" ")[0]} / ${
                     info.PAY_YN_NM
                 }`}</p>
-                <LinkButton onClick={handleDetailTarget} to={`/list`}>
-                    상세보기
-                </LinkButton>
+                <div>
+                    <LinkButton onClick={handleDetailTarget} to={`/list`}>
+                        상세보기
+                    </LinkButton>
+                    <AddFavButton onClick={handleAddFav}>
+                        즐겨찾기 추가
+                    </AddFavButton>
+                </div>
             </List>
         </>
     );
