@@ -17,7 +17,7 @@ const router = createBrowserRouter([
         ],
     },
     {
-        path: "/list/:PKLT_CD",
+        path: "/list",
         element: <DetailsPage />,
     },
     {

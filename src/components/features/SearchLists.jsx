@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import Header from "../layout/Header";
 import InputCon from "../common/InputCon";
 import SearchList from "../common/SearchList";
+import Buttons from "../common/Buttons";
 
 const SearchDiv = styled.div`
     width: 460px;
@@ -488,21 +489,24 @@ export default function SearchLists() {
     // const lists = [];
 
     return (
-        <SearchDiv>
-            <Header linkTo="main" />
-            <InputCon />
-            {lists.length ? (
-                <TitleDiv>
-                    <h2>송파구 근처 주차장이에요.</h2>
-                </TitleDiv>
-            ) : (
-                <TitleDiv>
-                    <h2>자치구를 입력해주세요.</h2>
-                </TitleDiv>
-            )}
-            {lists.map((list) => (
-                <SearchList key={list.PKLT_CD} info={list} />
-            ))}
-        </SearchDiv>
+        <>
+            <Buttons />
+            <SearchDiv>
+                <Header linkTo="main" />
+                <InputCon />
+                {lists.length ? (
+                    <TitleDiv>
+                        <h2>송파구 근처 주차장이에요.</h2>
+                    </TitleDiv>
+                ) : (
+                    <TitleDiv>
+                        <h2>자치구를 입력해주세요.</h2>
+                    </TitleDiv>
+                )}
+                {lists.map((list) => (
+                    <SearchList key={list.PKLT_CD} info={list} />
+                ))}
+            </SearchDiv>
+        </>
     );
 }

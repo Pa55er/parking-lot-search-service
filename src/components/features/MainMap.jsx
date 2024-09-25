@@ -25,5 +25,5 @@ export default function MainMap() {
         });
     }, []);
 
-    return <MapDiv id="map">map</MapDiv>;
+    return <MapDiv id="map" />;
 }
