@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
+import useZustandStore from "../../stores/AppStore";
 
 const Hr = styled.div`
     width: calc(100% - 3rem);
@@ -29,6 +30,12 @@ const LinkButton = styled(Link)`
 `;
 
 export default function SearchList({ info }) {
+    const setDetailTarget = useZustandStore((state) => state.setDetailTarget);
+
+    const handleDetailTarget = () => {
+        setDetailTarget(info);
+    };
+
     return (
         <>
             <Hr />
@@ -37,7 +44,9 @@ export default function SearchList({ info }) {
                 <p>{`${info.ADDR} / ${info.PRK_TYPE_NM.split(" ")[0]} / ${
                     info.PAY_YN_NM
                 }`}</p>
-                <LinkButton to={`/list/${info.PKLT_CD}`}>상세보기</LinkButton>
+                <LinkButton onClick={handleDetailTarget} to={`/list`}>
+                    상세보기
+                </LinkButton>
             </List>
         </>
     );

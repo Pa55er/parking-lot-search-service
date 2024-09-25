@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import Header from "../components/layout/Header";
 import DetailsMap from "../components/features/DetailsMap";
+import useZustandStore from "../stores/AppStore";
 
 const Wrap = styled.div`
     width: 100%;
@@ -80,52 +81,8 @@ const Table = styled.table`
 `;
 
 export default function DetailsPage() {
-    const target = {
-        PKLT_CD: "171721",
-        PKLT_NM: "세종로 공영주차장(시)",
-        ADDR: "종로구 세종로 80-1",
-        PKLT_TYPE: "NW",
-        PRK_TYPE_NM: "노외 주차장",
-        OPER_SE: "1",
-        OPER_SE_NM: "시간제 주차장",
-        TELNO: "02-2290-6566",
-        PRK_STTS_YN: "1",
-        PRK_STTS_NM: "현재~20분이내 연계데이터 존재(현재 주차대수 표현)",
-        TPKCT: 1260,
-        NOW_PRK_VHCL_CNT: 584,
-        NOW_PRK_VHCL_UPDT_TM: "2024-09-24 14:01:50",
-        PAY_YN: "Y",
-        PAY_YN_NM: "유료",
-        NGHT_PAY_YN: "N",
-        NGHT_PAY_YN_NM: "야간 미개방",
-        WD_OPER_BGNG_TM: "0000",
-        WD_OPER_END_TM: "2400",
-        WE_OPER_BGNG_TM: "0000",
-        WE_OPER_END_TM: "2400",
-        LHLDY_OPER_BGNG_TM: "0000",
-        LHLDY_OPER_END_TM: "2400",
-        SAT_CHGD_FREE_SE: "N",
-        SAT_CHGD_FREE_NM: "무료",
-        LHLDY_CHGD_FREE_SE: "N",
-        LHLDY_CHGD_FREE_SE_NAME: "무료",
-        PRD_AMT: "176000",
-        STRT_PKLT_MNG_NO: "",
-        BSC_PRK_CRG: 430,
-        BSC_PRK_HR: 5,
-        ADD_PRK_CRG: 430,
-        ADD_PRK_HR: 5,
-        BUS_BSC_PRK_CRG: 0,
-        BUS_BSC_PRK_HR: 0,
-        BUS_ADD_PRK_HR: 0,
-        BUS_ADD_PRK_CRG: 0,
-        DAY_MAX_CRG: 30900,
-        LAT: 37.57340269,
-        LOT: 126.97588429,
-        SHRN_PKLT_MNG_NM: "",
-        SHRN_PKLT_MNG_URL: "",
-        SHRN_PKLT_YN: "N",
-        SHRN_PKLT_ETC: "",
-    };
+    const target = useZustandStore((state) => state.detailTarget);
+    console.log(target);
 
     const formatTime = (time) => {
         const hours = time.slice(0, 2);
