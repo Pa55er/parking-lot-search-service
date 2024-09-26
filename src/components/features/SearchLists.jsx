@@ -486,7 +486,6 @@ export default function SearchLists() {
             SHRN_PKLT_ETC: "",
         },
     ];
-    // const lists = [];
 
     return (
         <>
@@ -500,7 +499,7 @@ export default function SearchLists() {
                     </TitleDiv>
                 ) : (
                     <TitleDiv>
-                        <h2>자치구를 입력해주세요.</h2>
+                        <h2>해당 구에는 주차장이 없는 것 같아요.</h2>
                     </TitleDiv>
                 )}
                 {lists.map((list) => (

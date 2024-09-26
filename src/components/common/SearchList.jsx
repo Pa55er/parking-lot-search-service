@@ -13,16 +13,19 @@ const List = styled.article`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    align-items: flex-start;
 
     h2 {
         color: #4395f6;
         font-size: 20px;
+        cursor: pointer;
     }
     p {
         opacity: 0.54;
         font-size: 15px;
     }
     div {
+        width: 100%;
         display: flex;
         justify-content: space-between;
     }
