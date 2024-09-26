@@ -13,6 +13,7 @@ const List = styled.article`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    align-items: flex-start;
 
     h2 {
         color: #4395f6;
@@ -24,6 +25,7 @@ const List = styled.article`
         font-size: 15px;
     }
     div {
+        width: 100%;
         display: flex;
         justify-content: space-between;
     }
@@ -32,6 +34,7 @@ const List = styled.article`
 const LinkButton = styled(Link)`
     color: #4395f6;
     font-size: 13px;
+    display: block;
 `;
 
 const DeleteFavButton = styled.i`
@@ -42,10 +45,17 @@ const DeleteFavButton = styled.i`
     }
 `;
 
-export default function FavoritesList({ info }) {
+export default function FavoritesList({ info, setLocalStorage }) {
     const setDetailTarget = useZustandStore((state) => state.setDetailTarget);
+
     const handleDetailTarget = () => {
         setDetailTarget(info);
+    };
+
+    const handleRemoveList = () => {
+        let favLists = JSON.parse(localStorage.getItem("favLists") || "[]");
+        favLists = favLists.filter((list) => list.PKLT_CD !== info.PKLT_CD);
+        setLocalStorage(favLists, info);
     };
 
     return (
@@ -57,7 +67,10 @@ export default function FavoritesList({ info }) {
                     <p>{`${info.ADDR} / ${info.PRK_TYPE_NM.split(" ")[0]} / ${
                         info.PAY_YN_NM
                     }`}</p>
-                    <DeleteFavButton className="fa-solid fa-x" />
+                    <DeleteFavButton
+                        onClick={handleRemoveList}
+                        className="fa-solid fa-x"
+                    />
                 </div>
                 <LinkButton onClick={handleDetailTarget} to={`/list`}>
                     상세보기

@@ -6,6 +6,8 @@ const useZustandStore = create(
         (set) => ({
             detailTarget: {},
             setDetailTarget: (newTarget) => set({ detailTarget: newTarget }),
+            listingTarget: [],
+            setListingTarget: (newList) => set({ listingTarget: newList }),
         }),
         {
             name: "zustandStore",
