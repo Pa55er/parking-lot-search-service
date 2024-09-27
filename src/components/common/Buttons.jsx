@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Button from "./Button";
 
-const ButtonsDiv = styled.div`
+const ButtonsDiv = styled.section`
     display: flex;
     flex-direction: column;
     gap: 1rem;

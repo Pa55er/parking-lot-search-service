@@ -1,4 +1,6 @@
 import styled from "@emotion/styled";
+import useZustandStore from "../../stores/AppStore";
+import { useEffect, useRef } from "react";
 
 const InputWrap = styled.div`
     width: 100%;
@@ -24,12 +26,39 @@ const Input = styled.input`
 `;
 
 export default function InputCon() {
+    const setInputFilter = useZustandStore((state) => state.setInputFilter);
+    const ref = useRef(null);
+
+    const handleSearchButton = () => {
+        const target = ref.current.value.trim();
+        ref.current.value = "";
+        if (target === "") return;
+        setInputFilter(target);
+    };
+
+    const handleInput = (e) => {
+        if (e.key !== "Enter") return;
+        const target = e.target.value.trim();
+        e.target.value = "";
+        if (target === "") return;
+        setInputFilter(target);
+    };
+
+    useEffect(() => {
+        setInputFilter("");
+    }, [setInputFilter]);
+
     return (
         <InputWrap>
-            <i className="fa-solid fa-magnifying-glass" />
+            <i
+                className="fa-solid fa-magnifying-glass"
+                onClick={handleSearchButton}
+            />
             <Input
                 type="text"
                 placeholder="자치구를 입력해주세요 (예 : 강남구, 도봉구)"
+                onKeyUp={handleInput}
+                ref={ref}
             />
         </InputWrap>
     );

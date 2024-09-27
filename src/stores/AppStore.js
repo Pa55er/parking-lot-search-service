@@ -8,6 +8,10 @@ const useZustandStore = create(
             setDetailTarget: (newTarget) => set({ detailTarget: newTarget }),
             listingTarget: [],
             setListingTarget: (newList) => set({ listingTarget: newList }),
+            inputFilter: "",
+            setInputFilter: (string) => set({ inputFilter: string }),
+            filterOpt: "",
+            setFilterOpt: (string) => set({ filterOpt: string }),
         }),
         {
             name: "zustandStore",
