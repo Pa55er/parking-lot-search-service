@@ -25,7 +25,7 @@ const useLocalStorage = () => {
             const targetInfo = JSON.parse(
                 localStorage.getItem("favLists") || "[]"
             );
-            let result = await fetchParkingData();
+            let result = await fetchParkingData("", "");
             const answer = [];
 
             for (const { PKLT_CD } of targetInfo) {

@@ -5,6 +5,8 @@ import SearchList from "../common/SearchList";
 import Buttons from "../common/Buttons";
 import useFilteredFetch from "../../hooks/useFilteredFetch";
 import LoadingUi from "../common/LoadingUi";
+import useZustandStore from "../../stores/AppStore";
+import NoList from "../common/NoList";
 
 const SearchDiv = styled.div`
     width: 460px;
@@ -26,6 +28,8 @@ const TitleDiv = styled.div`
 `;
 
 export default function SearchLists() {
+    const inputFilter = useZustandStore((state) => state.inputFilter);
+
     const [lists, isLoading] = useFilteredFetch();
 
     return (
@@ -34,20 +38,18 @@ export default function SearchLists() {
             <SearchDiv>
                 <Header linkTo="main" />
                 <InputCon />
-                {lists.length ? (
-                    <TitleDiv>
-                        <h2>송파구 근처 주차장이에요.</h2>
-                    </TitleDiv>
-                ) : isLoading ? (
+                <TitleDiv>
+                    <h2>{`검색내용 : ${inputFilter}`}</h2>
+                </TitleDiv>
+                {isLoading ? (
                     <LoadingUi />
+                ) : lists.length === 0 ? (
+                    <NoList />
                 ) : (
-                    <TitleDiv>
-                        <h2>해당 구에는 주차장이 없는 것 같아요.</h2>
-                    </TitleDiv>
+                    lists.map((list) => (
+                        <SearchList key={list.PKLT_CD} info={list} />
+                    ))
                 )}
-                {lists.map((list) => (
-                    <SearchList key={list.PKLT_CD} info={list} />
-                ))}
             </SearchDiv>
         </>
     );

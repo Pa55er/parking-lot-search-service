@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import useZustandStore from "../../stores/AppStore";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 const InputWrap = styled.div`
     width: 100%;
@@ -32,7 +32,6 @@ export default function InputCon() {
     const handleSearchButton = () => {
         const target = ref.current.value.trim();
         ref.current.value = "";
-        if (target === "") return;
         setInputFilter(target);
     };
 
@@ -40,13 +39,8 @@ export default function InputCon() {
         if (e.key !== "Enter") return;
         const target = e.target.value.trim();
         e.target.value = "";
-        if (target === "") return;
         setInputFilter(target);
     };
-
-    useEffect(() => {
-        setInputFilter("");
-    }, [setInputFilter]);
 
     return (
         <InputWrap>
