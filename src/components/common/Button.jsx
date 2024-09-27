@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import useZustandStore from "../../stores/AppStore";
 
 const ButtonDiv = styled.div`
     padding: 10px 1rem;
@@ -41,6 +42,31 @@ const ButtonDiv = styled.div`
         font-size: 15px;
         font-weight: bold;
     }
+
+    &.active {
+        color: white;
+    }
+    &.active > i {
+        color: white;
+    }
+    &.a {
+        background-color: #ffbc3b;
+    }
+    &.b {
+        background-color: #3ba1ff;
+    }
+    &.c {
+        background-color: #a687ff;
+    }
+    &.d {
+        background-color: #22c8aa;
+    }
+    &.e {
+        background-color: #2f8b6f;
+    }
+    &.f {
+        background-color: #00ffff;
+    }
 `;
 
 export default function Button({ filterName }) {
@@ -57,8 +83,35 @@ export default function Button({ filterName }) {
             ? "fa-solid fa-ruler"
             : "fa-solid fa-car";
 
+    const color =
+        filterName === "유료"
+            ? "a"
+            : filterName === "무료"
+            ? "b"
+            : filterName === "야간"
+            ? "c"
+            : filterName === "노상"
+            ? "d"
+            : filterName === "노외"
+            ? "e"
+            : "f";
+
+    const filterOpt = useZustandStore((state) => state.filterOpt);
+    const setFilterOpt = useZustandStore((state) => state.setFilterOpt);
+
+    const handleButton = () => {
+        if (filterName === filterOpt) {
+            setFilterOpt("");
+        } else {
+            setFilterOpt(filterName);
+        }
+    };
+
     return (
-        <ButtonDiv>
+        <ButtonDiv
+            onClick={handleButton}
+            className={filterName === filterOpt && `active ${color}`}
+        >
             <i className={fontAwesName} />
             <span>{filterName}</span>
         </ButtonDiv>
