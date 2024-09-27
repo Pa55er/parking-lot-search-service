@@ -46,8 +46,12 @@ export default function SearchLists() {
                 ) : lists.length === 0 ? (
                     <NoList />
                 ) : (
-                    lists.map((list) => (
-                        <SearchList key={list.PKLT_CD} info={list} />
+                    lists.map((list, index) => (
+                        <SearchList
+                            key={list.PKLT_CD}
+                            info={list}
+                            index={index}
+                        />
                     ))
                 )}
             </SearchDiv>

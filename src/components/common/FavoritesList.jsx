@@ -45,8 +45,9 @@ const DeleteFavButton = styled.i`
     }
 `;
 
-export default function FavoritesList({ info, setLocalStorage }) {
+export default function FavoritesList({ info, setLocalStorage, index }) {
     const setDetailTarget = useZustandStore((state) => state.setDetailTarget);
+    const setTargetMarker = useZustandStore((state) => state.setTargetMarker);
 
     const handleDetailTarget = () => {
         setDetailTarget(info);
@@ -58,11 +59,19 @@ export default function FavoritesList({ info, setLocalStorage }) {
         setLocalStorage(favLists, info);
     };
 
+    const handleClickTitle = () => {
+        setTargetMarker({
+            latitude: info.LAT,
+            longitude: info.LOT,
+            index,
+        });
+    };
+
     return (
         <>
             <Hr />
             <List>
-                <h2>{info.PKLT_NM}</h2>
+                <h2 onClick={handleClickTitle}>{info.PKLT_NM}</h2>
                 <div>
                     <p>{`${info.ADDR} / ${info.PRK_TYPE_NM.split(" ")[0]} / ${
                         info.PAY_YN_NM

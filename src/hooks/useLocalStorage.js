@@ -5,6 +5,7 @@ import fetchParkingData from "../utils/fetchParkingData";
 const useLocalStorage = () => {
     const lists = useZustandStore((state) => state.listingTarget);
     const setLists = useZustandStore((state) => state.setListingTarget);
+    const setTargetMarker = useZustandStore((state) => state.setTargetMarker);
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -37,12 +38,25 @@ const useLocalStorage = () => {
                 }
             }
 
+            if (answer.length)
+                setTargetMarker({
+                    latitude: answer[0].LAT,
+                    longitude: answer[0].LOT,
+                    index: 0,
+                });
+            else
+                setTargetMarker({
+                    latitude: 37.575752,
+                    longitude: 126.976823,
+                    index: -1,
+                });
+
             setLists(answer);
             setIsLoading(false);
         };
 
         initData();
-    }, [setLists]);
+    }, [setLists, setTargetMarker]);
 
     return [lists, isLoading, setLocalStorage];
 };

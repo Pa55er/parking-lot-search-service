@@ -55,11 +55,12 @@ export default function FavoritesLists() {
             ) : lists.length === 0 ? (
                 <NoList />
             ) : (
-                lists.map((list) => (
+                lists.map((list, index) => (
                     <FavoritesList
                         key={list.PKLT_CD}
                         info={list}
                         setLocalStorage={setLocalStorage}
+                        index={index}
                     />
                 ))
             )}

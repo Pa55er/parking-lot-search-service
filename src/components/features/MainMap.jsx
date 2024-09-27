@@ -11,6 +11,7 @@ const MapDiv = styled.div`
 export default function MainMap() {
     const lists = useZustandStore((state) => state.listingTarget);
     const setDetailTarget = useZustandStore((state) => state.setDetailTarget);
+    const targetMarker = useZustandStore((state) => state.targetMarker);
 
     const navigate = useNavigate();
 
@@ -18,15 +19,19 @@ export default function MainMap() {
         window.kakao.maps.load(() => {
             const mapContainer = document.getElementById("map"); // 지도를 표시할 div
 
-            const location = lists.length
-                ? { latitude: lists[0].LAT, longitude: lists[0].LOT }
-                : { latitude: 37.575752, longitude: 126.976823 };
+            const location =
+                targetMarker.index !== -1
+                    ? {
+                          latitude: targetMarker.latitude,
+                          longitude: targetMarker.longitude,
+                      }
+                    : { latitude: 37.575752, longitude: 126.976823 };
             const mapOption = {
                 center: new kakao.maps.LatLng(
                     location.latitude,
                     location.longitude
                 ), // 지도의 중심좌표
-                level: 7, // 지도의 확대 레벨
+                level: 3, // 지도의 확대 레벨
             };
 
             const map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -115,9 +120,11 @@ export default function MainMap() {
                     // 마커 위에 인포윈도우를 표시합니다
                     infowindow.open(map, marker);
                 });
+
+                if (i === targetMarker.index) infowindow.open(map, marker);
             }
         });
-    }, [lists]);
+    }, [lists, targetMarker, navigate, setDetailTarget]);
 
     return <MapDiv id="map" />;
 }

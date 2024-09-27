@@ -48,8 +48,10 @@ const AddFavButton = styled.button`
     }
 `;
 
-export default function SearchList({ info }) {
+export default function SearchList({ info, index }) {
     const setDetailTarget = useZustandStore((state) => state.setDetailTarget);
+    const setTargetMarker = useZustandStore((state) => state.setTargetMarker);
+
     const handleDetailTarget = () => {
         setDetailTarget(info);
     };
@@ -67,11 +69,19 @@ export default function SearchList({ info }) {
         }
     };
 
+    const handleClickTitle = () => {
+        setTargetMarker({
+            latitude: info.LAT,
+            longitude: info.LOT,
+            index,
+        });
+    };
+
     return (
         <>
             <Hr />
             <List>
-                <h2>{info.PKLT_NM}</h2>
+                <h2 onClick={handleClickTitle}>{info.PKLT_NM}</h2>
                 <p>{`${info.ADDR} / ${info.PRK_TYPE_NM.split(" ")[0]} / ${
                     info.PAY_YN_NM
                 }`}</p>

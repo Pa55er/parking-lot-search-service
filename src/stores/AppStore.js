@@ -9,6 +9,8 @@ const useZustandStore = create((set) => ({
     setInputFilter: (string) => set({ inputFilter: string }),
     filterOpt: "",
     setFilterOpt: (string) => set({ filterOpt: string }),
+    targetMarker: {},
+    setTargetMarker: (object) => set({ targetMarker: object }),
 }));
 
 export default useZustandStore;
