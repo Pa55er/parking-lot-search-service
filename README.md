@@ -1,8 +1,14 @@
-# React + Vite
+# 진행률 : 90%
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 완성
+- 검색 기능 완성
+- 즐겨찾기 기능 완성
+- 상세보기 완성
+- emotion 퍼블리싱 완성
 
-Currently, two official plugins are available:
+# 미완성
+- 해당 주자창 클릭시 맵 이동 미완성
+- vercel 배포 문제 발생 ( Mixed Content: 해결책을 알아보았으나 폴더 구성 때문인지 안됨.)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# vercel 주소
+https://parking-lot-search-service.vercel.app/
