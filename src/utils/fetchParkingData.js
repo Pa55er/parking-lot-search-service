@@ -1,4 +1,4 @@
-const baseURL = `http://openapi.seoul.go.kr:8088/${
+const baseURL = `/api/${
     import.meta.env.VITE_SEOUL_PARKING_API_KEY
 }/json/GetParkingInfo`;
 
