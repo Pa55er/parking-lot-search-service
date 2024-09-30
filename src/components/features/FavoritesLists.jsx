@@ -35,6 +35,17 @@ const TitleDiv = styled.div`
     }
 `;
 
+const FixedCom = styled.section`
+    width: 460px;
+    position: fixed;
+    background-color: white;
+    z-index: 10;
+`;
+
+const SlideCom = styled.section`
+    padding-top: 182px;
+`;
+
 export default function FavoritesLists() {
     const [lists, isLoading, setLocalStorage] = useLocalStorage();
 
@@ -45,25 +56,29 @@ export default function FavoritesLists() {
 
     return (
         <FavoritesDiv>
-            <Header linkTo="favorites" />
-            <TitleDiv>
-                <h2>즐겨찾기</h2>
-                <span onClick={handleClearFav}>비우기</span>
-            </TitleDiv>
-            {isLoading ? (
-                <LoadingUi />
-            ) : lists.length === 0 ? (
-                <NoList />
-            ) : (
-                lists.map((list, index) => (
-                    <FavoritesList
-                        key={list.PKLT_CD}
-                        info={list}
-                        setLocalStorage={setLocalStorage}
-                        index={index}
-                    />
-                ))
-            )}
+            <FixedCom>
+                <Header linkTo="favorites" />
+                <TitleDiv>
+                    <h2>즐겨찾기</h2>
+                    <span onClick={handleClearFav}>비우기</span>
+                </TitleDiv>
+            </FixedCom>
+            <SlideCom>
+                {isLoading ? (
+                    <LoadingUi />
+                ) : lists.length === 0 ? (
+                    <NoList />
+                ) : (
+                    lists.map((list, index) => (
+                        <FavoritesList
+                            key={list.PKLT_CD}
+                            info={list}
+                            setLocalStorage={setLocalStorage}
+                            index={index}
+                        />
+                    ))
+                )}
+            </SlideCom>
         </FavoritesDiv>
     );
 }

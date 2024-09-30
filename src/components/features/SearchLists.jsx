@@ -9,6 +9,7 @@ import useZustandStore from "../../stores/AppStore";
 import NoList from "../common/NoList";
 
 const SearchDiv = styled.div`
+    position: relative;
     width: 460px;
     height: 100vh;
     overflow-y: scroll;
@@ -27,6 +28,17 @@ const TitleDiv = styled.div`
     font-weight: bold;
 `;
 
+const FixedCom = styled.section`
+    width: 460px;
+    position: fixed;
+    background-color: white;
+    z-index: 10;
+`;
+
+const SlideCom = styled.section`
+    padding-top: 235px;
+`;
+
 export default function SearchLists() {
     const inputFilter = useZustandStore((state) => state.inputFilter);
 
@@ -36,24 +48,28 @@ export default function SearchLists() {
         <>
             <Buttons />
             <SearchDiv>
-                <Header linkTo="main" />
-                <InputCon />
-                <TitleDiv>
-                    <h2>{`검색내용 : ${inputFilter}`}</h2>
-                </TitleDiv>
-                {isLoading ? (
-                    <LoadingUi />
-                ) : lists.length === 0 ? (
-                    <NoList />
-                ) : (
-                    lists.map((list, index) => (
-                        <SearchList
-                            key={list.PKLT_CD}
-                            info={list}
-                            index={index}
-                        />
-                    ))
-                )}
+                <FixedCom>
+                    <Header linkTo="main" />
+                    <InputCon />
+                    <TitleDiv>
+                        <h2>{`검색내용 : ${inputFilter}`}</h2>
+                    </TitleDiv>
+                </FixedCom>
+                <SlideCom>
+                    {isLoading ? (
+                        <LoadingUi />
+                    ) : lists.length === 0 ? (
+                        <NoList />
+                    ) : (
+                        lists.map((list, index) => (
+                            <SearchList
+                                key={list.PKLT_CD}
+                                info={list}
+                                index={index}
+                            />
+                        ))
+                    )}
+                </SlideCom>
             </SearchDiv>
         </>
     );
