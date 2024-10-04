@@ -8,6 +8,7 @@ const useFilteredFetch = () => {
     const inputFilter = useZustandStore((state) => state.inputFilter);
     const filterOpt = useZustandStore((state) => state.filterOpt);
     const setTargetMarker = useZustandStore((state) => state.setTargetMarker);
+    const setIsSearchPage = useZustandStore((state) => state.setIsSearchPage);
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -24,8 +25,6 @@ const useFilteredFetch = () => {
                 });
             else
                 setTargetMarker({
-                    latitude: 37.575752,
-                    longitude: 126.976823,
                     index: -1,
                 });
 
@@ -33,8 +32,9 @@ const useFilteredFetch = () => {
             setIsLoading(false);
         };
 
+        setIsSearchPage(true);
         initData();
-    }, [inputFilter, filterOpt, setLists, setTargetMarker]);
+    }, [inputFilter, filterOpt, setLists, setTargetMarker, setIsSearchPage]);
 
     return [lists, isLoading];
 };
