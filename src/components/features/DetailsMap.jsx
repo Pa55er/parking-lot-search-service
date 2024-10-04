@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 import { useEffect } from "react";
 
+const { kakao } = window;
+
 const MapWrap = styled.div`
     padding-top: 40%;
     overflow: hidden;
