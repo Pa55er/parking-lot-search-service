@@ -6,6 +6,7 @@ const useLocalStorage = () => {
     const lists = useZustandStore((state) => state.listingTarget);
     const setLists = useZustandStore((state) => state.setListingTarget);
     const setTargetMarker = useZustandStore((state) => state.setTargetMarker);
+    const setIsSearchPage = useZustandStore((state) => state.setIsSearchPage);
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -13,12 +14,25 @@ const useLocalStorage = () => {
         (newArray, info = false) => {
             localStorage.setItem("favLists", JSON.stringify(newArray));
             if (info) {
-                setLists(lists.filter((list) => list.PKLT_CD !== info.PKLT_CD));
+                const target = lists.filter(
+                    (list) => list.PKLT_CD !== info.PKLT_CD
+                );
+                if (target.length)
+                    setTargetMarker({
+                        latitude: target[0].LAT,
+                        longitude: target[0].LOT,
+                        index: 0,
+                    });
+                else
+                    setTargetMarker({
+                        index: -1,
+                    });
+                setLists(target);
             } else {
                 setLists(newArray);
             }
         },
-        [lists, setLists]
+        [lists, setLists, setTargetMarker]
     );
 
     useEffect(() => {
@@ -46,8 +60,6 @@ const useLocalStorage = () => {
                 });
             else
                 setTargetMarker({
-                    latitude: 37.575752,
-                    longitude: 126.976823,
                     index: -1,
                 });
 
@@ -55,8 +67,9 @@ const useLocalStorage = () => {
             setIsLoading(false);
         };
 
+        setIsSearchPage(false);
         initData();
-    }, [setLists, setTargetMarker]);
+    }, [setLists, setTargetMarker, setIsSearchPage]);
 
     return [lists, isLoading, setLocalStorage];
 };
